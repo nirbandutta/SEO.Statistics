@@ -1,0 +1,53 @@
+﻿
+
+@model SEO.Statistics.WebUI.Models.SearchEngineInputViewModel
+
+@{
+    ViewData["Title"] = "Get Search Engine Statistics";
+}
+
+<h1>Get SEO Statistics</h1>
+
+<h4>Enter Data</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Statistics">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SearchKeyWord" class="control-label"></label>
+                <input asp-for="SearchKeyWord" class="form-control" />
+                <span asp-validation-for="SearchKeyWord" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchEngineType" class="control-label"></label>
+                <select class="form-control" asp-for="SearchEngineType"
+                        asp-items="Html.GetEnumSelectList<SEO.Statistics.WebUI.Common.SearchEngineType>()">
+                </select>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Get SEO Results" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-4">
+        @if (Model != null && Model.ShowResult)
+        {
+
+            <div class="row">
+                <h4> @Model.SearchEngineType.ToString() - SEO Result</h4>
+                <div class="form-group col-md-12">
+                    <div>Results - @Model.StatisticsResult </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
